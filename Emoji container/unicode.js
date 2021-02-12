@@ -877,12 +877,12 @@ let emojis = [
 
 
 
-// const emojibox = document.querySelector('.emoji-container')
-// let result = [];
-//  emojis.forEach((val) => {
-//    const x = document.body.innerHTML += String.fromCodePoint(parseInt(val, 16))
-//        result.push(x)
-//   });
+const emojibox = document.querySelector('.emoji-container')
+let result = [];
+ emojis.forEach((val) => {
+   const x = document.body.innerHTML += String.fromCodePoint(parseInt(val, 16))
+       result.push(x)
+  });
 
 
 
