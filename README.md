@@ -1,2 +1,0 @@
-# IDIA
- Project Productivity & Markup
