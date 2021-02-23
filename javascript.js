@@ -92,9 +92,6 @@ const Emoji_icons = (charactersEmoji) => {
             if (e.category === "People") {
                 tabs_array[1].insertAdjacentHTML("afterbegin" , content(e))
                 content(e);
-                // const Emoji_flex_people = document.querySelectorAll('.Emoji-flex')
-                // console.log(Emoji_flex_people)
-
                 }
             } 
         )
@@ -229,253 +226,147 @@ const flag = (charactersEmoji) => {
 // Search Method
 const Search_Emoji = (charactersEmoji) => {
         // creat input search event
-        search_input.addEventListener('input' , (e) => {
-                
-            const Emoji_flex = document.querySelectorAll('.Emoji-flex')
-            const Emoji_flex_array = Array.from(Emoji_flex)
-            console.log(Emoji_flex_array)
+        search_input.addEventListener('keyup' , (e) => {
             const input_string = e.target.value;
             const input_Uppercase = input_string.toLowerCase()
             const filterEmoji = charactersEmoji.filter( e => {
                 return e.name.toLowerCase().includes(input_Uppercase)
         }) 
-            // displayEmoji(filterEmoji) 
-            // console.log(filterEmoji)
-            upgradedDisplay(filterEmoji , charactersEmoji , Emoji_flex_array)
-            // fuka(charactersEmoji , filterEmoji)
+            displayEmoji(filterEmoji) 
+    })
+        
+}
+
+search_input.addEventListener('input' , e => {
+    const act = document.querySelector('#act')
+    console.log(e.target.value)
+    if (e.target.value.length === 0) {
+        act.style.display = "none"
+    } else {
+        act.style.display = ""
+    }
+})
+
+
+// positioning Search
+const displayEmoji = (filterEmoji) => {
+    if (filterEmoji.length !== 0) {
+        const htmlString = filterEmoji
+            .map(e => {
+                return `
+                <!-- START -->
+                <div class="Emoji-flex"><div class="Emoji" data-tooltip="${e.name}">
+                <img class="Emoji-img" src="./node_modules/emoji-datasource-twitter/img/twitter/64/${e.image}" >
+                </div>  
+                <div class="Emoji-tooltip"></div>
+                </div>
+                <!--  END  -->`;
+            })
+            .join('')
+            const recent = document.querySelector('#recent')
+            recent.innerHTML = htmlString;
+        } else if (filterEmoji.length === 0)  {
+                const Nostring = '<span class="empty">No Result</span>'
+                recent.innerHTML = Nostring 
+                
+    } 
+} 
+
+
+// tooltip spawn
+let setUpToolTip = () => {
+    let tooltip = " ";
+    tooltipEmoji = document.querySelector('.Emoji-tooltip')
+    toolTipElements = document.querySelectorAll('.Emoji')
+    const tooltipElemArray = Array.from(toolTipElements)
+    let timer;
+
+    let displayTooltip = (e , step) => {
+        tooltip = step
+        tooltipEmoji.innerHTML = tooltip
+        tooltipEmoji.style.top = e.pageY  + "px"
+        tooltipEmoji.style.left = e.pageX +  "px"
+        fadeIN(tooltipEmoji)
+        }
+
+        let fadeOut = function(e) {
+            let op = 1;
+            if (!timer) {
+                timer = setInterval(() => {
+                if (op <= 0.1) {
+                    clearInterval(timer);
+                    timer = null
+                    e.style.opacity = 0;
+                    e.style.display = "none";
+                }
+                e.style.opacity = op;
+                   op -= op * 0.1
+            }, 10)
+                
+            }
+        }
+        let fadeIN = function(e) {
+            let op = 0.1;
+            e.style.display = "block"
+             var timer = setInterval(() => {
+                if (op >= 1) {
+                    clearInterval(timer);
+                    
+                }
+                e.style.opacity = op;
+                op += op * 0.1
+            }, 10)
+        }
+
+    tooltipElemArray.forEach((e) => {
+            const step = e.dataset.tooltip
+            let timeout ;
+            e.addEventListener('mouseenter' , (e) => {
+    timeout = setTimeout(() => {
+                    displayTooltip(e , step)
+                },400)
+            });
+
+            e.addEventListener("mouseleave", e => {
+                clearTimeout(timeout)
+                fadeOut(tooltipEmoji)
+        })
     })
 }
 
 
 
-
-// console.log(Emoji_flex)
-const upgradedDisplay = (filterEmoji , charactersEmoji , Emoji_flex_array) => {
-        filterEmoji.filter(elem => {
-            Emoji_flex_array.filter( e => {
-                if (elem.short_name != e.dataset.filter) {
-                    console.log(elem.short_name)
-                    console.log(e.dataset.filter)
-                    // e.style.display = "block"
-                    return true 
-                } else if (elem.short_name != e.dataset.filter) {
-                    // e.style.display = "none"
-                    return false
-                }
-            })
-        })
-        
-}
-
-// function fuka(charactersEmoji , filterEmoji) {
-//     for( let i = 0; i < tabtitle.length; i++) {
-//         if (tabtitle[i].style.display === "block") {
-//             return 
-//         } else if (tabtitle[i].style.display === "none" && filterEmoji.length !== 0) {
-//                 animals(charactersEmoji)
-//                 food(charactersEmoji) 
-//                 activity(charactersEmoji) 
-//                 object(charactersEmoji)
-//                 symbol(charactersEmoji)
-//                 flag(charactersEmoji)
-//                 travel(charactersEmoji)
-//         } 
-//         else if (filterEmoji.length === 0) {
-//             const Nostring = '<span class="empty">No Result</span>'
-//             Emoji_list.innerHTML = Nostring
-//         }
-//     }
-    
-//     }
-
-// sear
-// ch_input.addEventListener('input' , e => {
-    
-
-// })
-// fuka(charactersEmoji)
-
-
-/* <div class="tab-title" id="recent" >
-<div class="nav">${e.category}</div>
-    <div class="flex-tab">
-        <!-- START -->
-        <!--  END  -->
-    </div>
-</div> */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// positioning Search
-// const displayEmoji = (filterEmoji) => {
-//     if (filterEmoji.length !== 0) {
-//         const htmlString = filterEmoji
-//             .map(e => {
-//                 return `<div class="tab-title">
-//                 <div class="nav">Results</div>
-//                 <!-- START -->
-//                 <div class="flex-tab"><div class="Emoji-flex"><div class="Emoji" data-tooltip="${e.name}">
-//                 <img class="Emoji-img" src="./node_modules/emoji-datasource-twitter/img/twitter/64/${e.image}" >
-//                 </div>  
-//                 <div class="Emoji-tooltip"></div>
-//                 </div>
-//                 </div>
-//                 <!--  END  -->
-//                 </div>`;
-//             })
-//             .join('')
-//             Emoji_list.innerHTML = htmlString;
-//         } else if (filterEmoji.length === 0)  {
-//                 const Nostring = '<span class="empty">No Result</span>'
-//                 Emoji_list.innerHTML = Nostring 
-                
-//     }  
-//         search_input.addEventListener('input' , (charactersEmoji) => {
-//         if (!search_input.value) {
-//             console.log('ZAAAA WAAARDUUU TOKIO TOMARI')
-//             // return
-//         }
-    
-//     })
-// }
-
-// tooltip spawn
-// let setUpToolTip = () => {
-//     let tooltip = " ";
-//     tooltipEmoji = document.querySelector('.Emoji-tooltip')
-//     toolTipElements = document.querySelectorAll('.Emoji')
-//     const tooltipElemArray = Array.from(toolTipElements)
-//     let timer;
-
-//     let displayTooltip = (e , step) => {
-//         tooltip = step
-//         tooltipEmoji.innerHTML = tooltip
-//         tooltipEmoji.style.top = e.pageY  + "px"
-//         tooltipEmoji.style.left = e.pageX +  "px"
-//         fadeIN(tooltipEmoji)
-//         }
-
-//         let fadeOut = function(e) {
-//             let op = 1;
-//             if (!timer) {
-//                 timer = setInterval(() => {
-//                 if (op <= 0.1) {
-//                     clearInterval(timer);
-//                     timer = null
-//                     e.style.opacity = 0;
-//                     e.style.display = "none";
-//                 }
-//                 e.style.opacity = op;
-//                    op -= op * 0.1
-//             }, 10)
-                
-//             }
-//         }
-//         let fadeIN = function(e) {
-//             let op = 0.1;
-//             e.style.display = "block"
-//              var timer = setInterval(() => {
-//                 if (op >= 1) {
-//                     clearInterval(timer);
-                    
-//                 }
-//                 e.style.opacity = op;
-//                 op += op * 0.1
-//             }, 10)
-//         }
-
-//     tooltipElemArray.forEach((e) => {
-//             const step = e.dataset.tooltip
-//             let timeout ;
-//             e.addEventListener('mouseenter' , (e) => {
-//     timeout = setTimeout(() => {
-//                     displayTooltip(e , step)
-//                 },400)
-//             });
-
-//             e.addEventListener("mouseleave", e => {
-//                 clearTimeout(timeout)
-//                 fadeOut(tooltipEmoji)
-//         })
-//     })
-// }
-
-
-
 // Emoji Panel functions 
-// buttons.forEach( e => e.addEventListener('click' , (tab) => 
-//         {       
-//                 const openY = tab.target.dataset.btn
-//                 const open = document.querySelector(openY)
-//                 content_data.forEach( tabs => tabs.classList.remove('active'))
-//                 open.classList.toggle('active')
-//         }
-// ))
+buttons.forEach( e => e.addEventListener('click' , (tab) => 
+        {       
+                const openY = tab.target.dataset.btn
+                const open = document.querySelector(openY)
+                content_data.forEach( tabs => tabs.classList.remove('active'))
+                open.classList.toggle('active')
+        }
+))
 
 
 // Buttons trigger Emoji
-// const click = trigger.addEventListener ('click' , function(e) {
-//         e.preventDefault()
-//         e.stopPropagation()
-//         let x = e.clientX
-//         let y = e.clientY
-//         Emoji_panel.style.left = x + "px";
-//         Emoji_panel.style.top = y + "px";
-//         Emoji_panel.style.display = "block";
-// }) 
+const click = trigger.addEventListener ('click' , function(e) {
+        e.preventDefault()
+        e.stopPropagation()
+        let x = e.clientX
+        let y = e.clientY
+        Emoji_panel.style.left = x + "px";
+        Emoji_panel.style.top = y + "px";
+        Emoji_panel.style.display = "block";
+}) 
 
 
-// document.addEventListener('mouseup', function(e) {
-//   var container = document.querySelector('.Emoji-panel');
-//   if (!container.contains(e.target)) {
-//     container.style.display = 'none';
-//   }
-// });
+document.addEventListener('mouseup', function(e) {
+  var container = document.querySelector('.Emoji-panel');
+  if (!container.contains(e.target)) {
+    container.style.display = 'none';
+  }
+});
 
 
-//
-
-
-
-// <!-- START -->
-// <div class="flex-tab"><div class="Emoji-flex"><div class="Emoji" data-tooltip="${e.name}">
-// <img class="Emoji-img" src="./node_modules/emoji-datasource-twitter/img/twitter/64/${e.image}" >
-// </div>  
-// <div class="Emoji-tooltip"></div>
-// </div>
-// </div>
-// <!--  END  -->
 
 
 
