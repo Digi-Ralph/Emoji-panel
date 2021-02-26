@@ -1,0 +1,42 @@
+.list {
+    margin:50px auto;
+    width: 450px;
+    padding: 0.6em;
+    overflow: hidden auto;
+    height: 55vh;
+    background:#1e212d;
+    color:#fff;
+    .tab-title {
+        display: flex;
+        flex-wrap: wrap;
+        .flex-tab {
+                padding: 0 10px;
+                margin-top: 0.5em;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            .flex {
+                    cursor: pointer;
+                    border-radius: 3px;
+                    margin: 0.3em 0.1em;
+                    &:hover,&:focus-within {
+                    background-color: rgb(211, 211, 211);
+                    
+                    }
+                .icon {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 30px;
+                    height: 30px;
+                    .img { 
+                        width: 80%;
+                        height: 80%;
+                    }   
+                }  
+            }
+        }    
+    }
+}
+
+                
