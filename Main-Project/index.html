@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
     <link rel="stylesheet" href="./css.css">
     <title>Document</title>
 </head>
@@ -14,31 +15,46 @@
     <div class="container">
 
         <div class="sidebar-container">
-
+            <div class="menu-container">
+                <!-- sign up -->
+                <div class="signup-wrapper box">text</div>
+                <!-- manage pages -->
+                <div class="vault-container box">
+                    <ul class="list"><i class="fas fa-chevron-right"></i><a href="#">Add Page</a><i class="fas fa-feather-alt"></i><i class="fas fa-ellipsis-h"></i></ul>
+                </div>
+                <!-- Add Page -->
+                <div class="page-container box">
+                    <ul class="list"><i class="fas fa-plus-square"></i><a href="#">Add Page</a></ul>
+                </div>
+            </div>
         </div>
 
+
+        <!-- document start -->
         <div class="content-container close">
             <div class="header">TITLE</div>
             <div class="wrapper-content">
                 <div class="content">
 
                     <div class="container-title">
-                        <div class="title" id='contenteditable'  
-                            contenteditable="true" 
-                            style="text-align: center;white-space: pre-wrap;
-                            word-break: break-word;flex-grow: 1;"
-                            data-placeholder="Write Title Here"></div>
+                        <div class="title"  
+                        contenteditable 
+                        style="text-align: center;white-space: pre-wrap;
+                            word-break: break-word;flex-grow: 1;line-height: 1.4em;" 
+                            placeholder="Space monkeys"></div>
                     </div>
 
-                    <div class="container-data" contenteditable="true" 
-                    data-placeholder="Write Something Here....."
-                    tabindex="0" spellcheck="true" 
-                    style="text-align: left; padding: 3em 10em; line-height: 1.3em;white-space: pre-wrap;
-                    word-break: break-word;flex-grow: 1;"></div>
+                    <div class="container-data " 
+                        contenteditable 
+                        placeholder="Write Something Here....."
+                        tabindex="0" 
+                        spellcheck="true" 
+                        style="text-align: left; padding: 3px 2px;white-space: pre-wrap;
+                    word-break: break-word;flex-grow: 1;margin-top: 0.5em;"></div>
 
 
-                    
-
+        <!-- document ends -->
+   
 
                 </div>
             </div>

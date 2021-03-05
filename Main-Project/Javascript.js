@@ -1,30 +1,24 @@
 const sidebar = document.querySelector('.sidebar-container')
 const content = document.querySelector('.content-container')
-const header = documnet.querySelector('.header')
+const header = document.querySelector('.header')
 
 
-header.addEventListener('click' , e => {
+header.addEventListener('click', () => {
     sidebar.classList.toggle('active')
     content.classList.toggle('close')
 })
 
 
-const add = document.querySelector('.add-list');
-const mainList = document.querySelector('.main-list')
-console.log(mainList)
-
-add.addEventListener('click' , creatList)
-
-function creatList() {
-    const li = document.createElement('li')
-    const a = document.createElement('a')
-    const icon = `<i id="emoji-trigger" class="fas fa-file"></i>`
-    li.classList.add('add-list')
-    a.textContent = " Untitled"
-    mainList.insertAdjacentElement('Afterbegin' , li)
-    li.innerHTML = icon
-    li.append(a)
-}
-
 // PlaceHolders 
-const placehold = document.querySelectorAll('contenteditable')
+const placeholder = document.querySelectorAll('.container-data')
+placeholder.forEach(e => {
+    e.addEventListener('input', () => {
+        if (e.innerHTML.trim() === '<br>') e.innerHTML = ''
+    })
+})
+const titleholder = document.querySelector('.title')
+titleholder.addEventListener('input', () => {
+    if (titleholder.innerHTML.trim() === '<br>') titleholder.innerHTML = ''
+})
+// END
+// Creat new Editable Blocks 
